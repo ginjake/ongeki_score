@@ -10,4 +10,8 @@
   {{ csrf_field() }}
   <button type="submit">インポート</button>
 </div>
+
+<div>
+<div><a href="{{ url('csv_sample') }}">csvサンプル</a></div>
+</div>
 @endsection

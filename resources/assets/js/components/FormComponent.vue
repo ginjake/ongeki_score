@@ -1,74 +1,71 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-                <div class="card card-default">
-                    <div class="card-header">Example Component</div>
-                    <div class="card-body">
-                      <div class="form-group">
-                        <div class="form-inline">
-                          <label class="col-sm-3">レベル</label>
-                          <label for="difficult" class="col-sm-3">難易度</label>
-                          <label for="name" class="col-sm-3">名前</label>
-                          <label for="nankna" class="col-sm-3">user</label>
-                        </div>
-                        <div class="form-inline">
-                          <div class="col-sm-3 form-inline">
-                            <input type="text" class="form-control col-sm-5" v-model="form_data['level_start']">
-                            <span class="col-sm-2">~</span>
-                            <input type="text" class="form-control col-sm-5" v-model="form_data['level_end']">
-                          </div>
-                          <div class="col-sm-3 form-inline">
-                            <select v-model="form_data['difficulty']" class="form-control col-sm-12" id="select">
-                              <option>BASIC</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>HOGEHOHOGE</option>
-                            </select>
-                          </div>
-                          <div class="col-sm-3 form-inline">
-                            <input type="text" class="form-control col-sm-12" id="name" v-model="form_data['name']">
-                          </div>
-                          <div class="col-sm-3 form-inline">
-                            <input type="text" class="form-control col-sm-12" id="user" v-model="form_data['user']">
-                          </div>
-                        </div>
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card card-default">
+                <div class="card-header">絞り込みフィルター</div>
+                <div class="card-body">
+                  <div class="form-group">
+                    <div class="form-inline">
+                      <label class="col-sm-3">レベル</label>
+                      <label for="difficult" class="col-sm-3">難易度</label>
+                      <label for="name" class="col-sm-3">user</label>
+                      <label for="nankna" class="col-sm-3">なんか1</label>
+                    </div>
+                    <div class="form-inline">
+                      <div class="col-sm-3 form-inline">
+                        <input type="text" class="form-control col-sm-5" v-model="form_data['level_start']">
+                        <span class="col-sm-2">~</span>
+                        <input type="text" class="form-control col-sm-5" v-model="form_data['level_end']">
                       </div>
-                      
-                      <div class="form-group">
-                        <div class="form-inline">
-                          <label class="col-sm-3">回数</label>
-                          <label for="difficult" class="col-sm-3">クリア</label>
-                          <label for="name" class="col-sm-3">スコア</label>
-                          <label for="nankna" class="col-sm-3">なんか2</label>
-                        </div>
-                        <div class="form-inline">
-                          <div class="col-sm-3 form-inline">
-                            <input type="number" class="form-control col-sm-5" v-model="form_data['play_count_start']">
-                            <span class="col-sm-2">~</span>
-                            <input type="number" class="form-control col-sm-5" v-model="form_data['play_count_end']">
-                          </div>
-                          <div class="col-sm-3 form-inline">
-                            <select v-model="form_data['clear']" class="form-control col-sm-12" id="select">
-                              <option value="">指定無し</option>
-                              <option value="1">クリア済み</option>
-                              <option value="0">未クリア</option>
-                            </select>
-                          </div>
-                          <div class="col-sm-3 form-inline">
-                            <input type="text" class="form-control col-sm-5" v-model="form_data['score_start']">
-                            <span class="col-sm-2">~</span>
-                            <input type="text" class="form-control col-sm-5" v-model="form_data['score_end']">
-                          </div>
-                          <div class="col-sm-3 form-inline">
-                            <input type="text" class="form-control col-sm-12" id="nankna">
-                          </div>
-                        </div>
+                      <div class="col-sm-3 form-inline">
+                        <select v-model="form_data['difficulty']" class="form-control col-sm-12" id="select">
+                          <option value="">指定無し</option>
+                          <option v-for="difficulty in difficulties">{{difficulty.name}}</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-3 form-inline">
+                        <input type="text" class="form-control col-sm-12" id="user" v-model="form_data['user']">
+                      </div>
+                      <div class="col-sm-2 form-inline">
+                        <input type="text" class="form-control col-sm-12" id="name" v-model="form_data['name']">
                       </div>
                     </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <div class="form-inline">
+                      <label class="col-sm-3">回数</label>
+                      <label for="difficult" class="col-sm-3">クリア</label>
+                      <label for="name" class="col-sm-4">スコア</label>
+                      <label for="nankna" class="col-sm-2">なんか2</label>
+                    </div>
+                    <div class="form-inline">
+                      <div class="col-sm-3 form-inline">
+                        <input type="number" class="form-control col-sm-5" v-model="form_data['play_count_start']">
+                        <span class="col-sm-2">~</span>
+                        <input type="number" class="form-control col-sm-5" v-model="form_data['play_count_end']">
+                      </div>
+                      <div class="col-sm-3 form-inline">
+                        <select v-model="form_data['clear']" class="form-control col-sm-12" id="select">
+                          <option value="">指定無し</option>
+                          <option value="1">クリア済み</option>
+                          <option value="0">未クリア</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-4 form-inline">
+                        <input type="text" class="form-control col-sm-5" v-model="form_data['score_start']">
+                        <span class="col-sm-2">~</span>
+                        <input type="text" class="form-control col-sm-5" v-model="form_data['score_end']">
+                      </div>
+                      <div class="col-sm-2 form-inline">
+                        <input type="text" class="form-control col-sm-12" id="nankna">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group text-center">
+                    <button class="btn btn-primary col-sm-8" v-on:click="submit">絞り込み</button>
+                  </div>
                 </div>
-                <button v-on:click="submit">絞り込み</button>
             </div>
         </div>
     </div>
@@ -78,7 +75,8 @@
     export default {
         data () {
           return {
-            form_data: {user:this.first_user}
+            form_data: {user:this.first_user},
+            difficulties:{}
           }
         },
         props: [
@@ -86,6 +84,17 @@
         ],
         mounted() {
             console.log('Component mounted.')
+            var vm = this;
+            axios.get('//www.ginjake.net/ongeki/api/difficulty',{
+               params: {type:1}
+             }) // => 成功時
+            .then(function (response) {
+              vm.difficulties = response.data;
+            })
+            .catch(function (error) { // => 失敗時
+              console.log("error");
+            })
+            
             this.$parent.getList(this.form_data)
         },
         methods: {

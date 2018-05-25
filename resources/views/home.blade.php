@@ -17,7 +17,7 @@
                     You are logged in!
                     <div><a href="{{ url('upload') }}">upload</a></div>
                     <div><a href="{{ url('?user='.\Auth::user()['name']) }}">スコア</a></div>
-                    <div>12345</div>
+                    <div><a href="{{ url('api') }}">api</a></div>
                 </div>
             </div>
         </div>

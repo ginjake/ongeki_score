@@ -12,17 +12,23 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
-//Route::get('posts/index/{category?}', 'PostController@index');
-//Route::get('score/{name?}', 'MusicScoreController@index');
-Route::get('score', 'MusicScoreController@index');
+
+
 Route::get('upload', 'MusicScoreController@upload');
 Route::post('save_score', 'MusicScoreController@save_score');
+Route::get('api', function () {
+    return view('api');
+});
+
+Route::get('csv_sample', function () {
+    return response()->download('storage/app/public/sample.csv');
+});
 
 Route::resource('music', 'MusicController');
-Route::get('music_update', 'MusicController@update');
-Route::post('music_update', 'MusicController@update');
+//Route::get('music_update', 'MusicController@update');
+//Route::post('music_update', 'MusicController@update');
 //Route::resource('posts', 'PostController');
 Auth::routes();
 

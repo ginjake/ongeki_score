@@ -18,7 +18,7 @@ class MusicScoreController extends Controller
   
   public function __construct()
   {
-      $this->middleware('auth');
+      $this->middleware('auth')->except(['index']);
   }
   public function index(Request $request)
   {
@@ -51,31 +51,31 @@ class MusicScoreController extends Controller
                       ->rightJoin('difficulties', 'music_scores.difficulty_id', '=', 'difficulties.id')
                       ->where('music_scores.user_id',"=",$user->id);
       
-      if (!empty($get_data["level_start"])) {
+      if (isset($get_data["level_start"])) {
         $score_query->where('music_difficulty_relations.level',">=",$get_data["level_start"]);
       }
-      if (!empty($get_data["level_end"])) {
+      if (isset($get_data["level_end"])) {
         $score_query->where('music_difficulty_relations.level',"<=",$get_data["level_end"]);
       }
       
-      if (!empty($get_data["score_start"])) {
+      if (isset($get_data["score_start"])) {
         $score_query->where('music_scores.score',">=",$get_data["score_start"]);
       }
-      if (!empty($get_data["score_end"])) {
-        $score_query->where('music_scores.score',">=",$get_data["score_end"]);
+      if (isset($get_data["score_end"])) {
+        $score_query->where('music_scores.score',"<=",$get_data["score_end"]);
       }
       
-      if (!empty($get_data["play_count_start"])) {
+      if (isset($get_data["play_count_start"])) {
         $score_query->where('music_scores.play_count',">=",$get_data["play_count_start"]);
       }
-      if (!empty($get_data["play_count_end"])) {
-        $score_query->where('music_scores.play_count',">=",$get_data["play_count_end"]);
+      if (isset($get_data["play_count_end"])) {
+        $score_query->where('music_scores.play_count',"<=",$get_data["play_count_end"]);
       }
       
-      if (!empty($get_data["clear"])) {
+      if (isset($get_data["clear"])) {
         $score_query->where('music_scores.clear',"=",$get_data["clear"]);
       }
-      if (!empty($get_data["difficulty"])) {
+      if (isset($get_data["difficulty"])) {
         $score_query->where('difficulties.name',"=",$get_data["difficulty"]);
       }
       $scores = $score_query->get();
@@ -128,6 +128,8 @@ class MusicScoreController extends Controller
     $request->session()->flash('message', '登録したでござる');
     $lexer = new Lexer($config);
     $lexer->parse($move, $interpreter);
+    \File::delete($move);
+
     return view('music_scores.upload');
     
   }

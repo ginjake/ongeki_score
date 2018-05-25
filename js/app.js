@@ -14009,7 +14009,7 @@ var Vueobj = new Vue({
   methods: {
     getList: function getList(send_data) {
       var vm = this;
-      axios.get('//www.ginjake.net/ongeki/score', {
+      axios.get('//www.ginjake.net/ongeki/api/score', {
         params: send_data
       }) // => 成功時
       .then(function (response) {
@@ -47521,20 +47521,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      form_data: { user: this.first_user }
+      form_data: { user: this.first_user },
+      difficulties: {}
     };
   },
 
   props: ['first_user'],
   mounted: function mounted() {
     console.log('Component mounted.');
+    var vm = this;
+    axios.get('//www.ginjake.net/ongeki/api/difficulty', {
+      params: { type: 1 }
+    }) // => 成功時
+    .then(function (response) {
+      vm.difficulties = response.data;
+    }).catch(function (error) {
+      // => 失敗時
+      console.log("error");
+    });
+
     this.$parent.getList(this.form_data);
   },
 
@@ -47554,346 +47563,344 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c("div", { staticClass: "card card-default" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _vm._v("Example Component")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("div", { staticClass: "form-group" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-inline" }, [
-                _c("div", { staticClass: "col-sm-3 form-inline" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form_data["level_start"],
-                        expression: "form_data['level_start']"
-                      }
-                    ],
-                    staticClass: "form-control col-sm-5",
-                    attrs: { type: "text" },
-                    domProps: { value: _vm.form_data["level_start"] },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.form_data,
-                          "level_start",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "col-sm-2" }, [_vm._v("~")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form_data["level_end"],
-                        expression: "form_data['level_end']"
-                      }
-                    ],
-                    staticClass: "form-control col-sm-5",
-                    attrs: { type: "text" },
-                    domProps: { value: _vm.form_data["level_end"] },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.form_data,
-                          "level_end",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-3 form-inline" }, [
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.form_data["difficulty"],
-                          expression: "form_data['difficulty']"
-                        }
-                      ],
-                      staticClass: "form-control col-sm-12",
-                      attrs: { id: "select" },
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.$set(
-                            _vm.form_data,
-                            "difficulty",
-                            $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          )
-                        }
-                      }
-                    },
-                    [
-                      _c("option", [_vm._v("BASIC")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("2")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("3")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("4")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("HOGEHOHOGE")])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-3 form-inline" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form_data["name"],
-                        expression: "form_data['name']"
-                      }
-                    ],
-                    staticClass: "form-control col-sm-12",
-                    attrs: { type: "text", id: "name" },
-                    domProps: { value: _vm.form_data["name"] },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.form_data, "name", $event.target.value)
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-3 form-inline" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form_data["user"],
-                        expression: "form_data['user']"
-                      }
-                    ],
-                    staticClass: "form-control col-sm-12",
-                    attrs: { type: "text", id: "user" },
-                    domProps: { value: _vm.form_data["user"] },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.form_data, "user", $event.target.value)
-                      }
-                    }
-                  })
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _vm._m(1),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-inline" }, [
-                _c("div", { staticClass: "col-sm-3 form-inline" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form_data["play_count_start"],
-                        expression: "form_data['play_count_start']"
-                      }
-                    ],
-                    staticClass: "form-control col-sm-5",
-                    attrs: { type: "number" },
-                    domProps: { value: _vm.form_data["play_count_start"] },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.form_data,
-                          "play_count_start",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "col-sm-2" }, [_vm._v("~")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form_data["play_count_end"],
-                        expression: "form_data['play_count_end']"
-                      }
-                    ],
-                    staticClass: "form-control col-sm-5",
-                    attrs: { type: "number" },
-                    domProps: { value: _vm.form_data["play_count_end"] },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.form_data,
-                          "play_count_end",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-3 form-inline" }, [
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.form_data["clear"],
-                          expression: "form_data['clear']"
-                        }
-                      ],
-                      staticClass: "form-control col-sm-12",
-                      attrs: { id: "select" },
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.$set(
-                            _vm.form_data,
-                            "clear",
-                            $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          )
-                        }
-                      }
-                    },
-                    [
-                      _c("option", { attrs: { value: "" } }, [
-                        _vm._v("指定無し")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "1" } }, [
-                        _vm._v("クリア済み")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "0" } }, [
-                        _vm._v("未クリア")
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-3 form-inline" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form_data["score_start"],
-                        expression: "form_data['score_start']"
-                      }
-                    ],
-                    staticClass: "form-control col-sm-5",
-                    attrs: { type: "text" },
-                    domProps: { value: _vm.form_data["score_start"] },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.form_data,
-                          "score_start",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "col-sm-2" }, [_vm._v("~")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form_data["score_end"],
-                        expression: "form_data['score_end']"
-                      }
-                    ],
-                    staticClass: "form-control col-sm-5",
-                    attrs: { type: "text" },
-                    domProps: { value: _vm.form_data["score_end"] },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.form_data,
-                          "score_end",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _vm._m(2)
-              ])
-            ])
-          ])
+  return _c("div", { staticClass: "row justify-content-center" }, [
+    _c("div", { staticClass: "col-md-12" }, [
+      _c("div", { staticClass: "card card-default" }, [
+        _c("div", { staticClass: "card-header" }, [
+          _vm._v("絞り込みフィルター")
         ]),
         _vm._v(" "),
-        _c("button", { on: { click: _vm.submit } }, [_vm._v("絞り込み")])
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-inline" }, [
+              _c("div", { staticClass: "col-sm-3 form-inline" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form_data["level_start"],
+                      expression: "form_data['level_start']"
+                    }
+                  ],
+                  staticClass: "form-control col-sm-5",
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.form_data["level_start"] },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.form_data,
+                        "level_start",
+                        $event.target.value
+                      )
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("span", { staticClass: "col-sm-2" }, [_vm._v("~")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form_data["level_end"],
+                      expression: "form_data['level_end']"
+                    }
+                  ],
+                  staticClass: "form-control col-sm-5",
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.form_data["level_end"] },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form_data, "level_end", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-3 form-inline" }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form_data["difficulty"],
+                        expression: "form_data['difficulty']"
+                      }
+                    ],
+                    staticClass: "form-control col-sm-12",
+                    attrs: { id: "select" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.form_data,
+                          "difficulty",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "" } }, [
+                      _vm._v("指定無し")
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(_vm.difficulties, function(difficulty) {
+                      return _c("option", [_vm._v(_vm._s(difficulty.name))])
+                    })
+                  ],
+                  2
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-3 form-inline" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form_data["user"],
+                      expression: "form_data['user']"
+                    }
+                  ],
+                  staticClass: "form-control col-sm-12",
+                  attrs: { type: "text", id: "user" },
+                  domProps: { value: _vm.form_data["user"] },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form_data, "user", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-2 form-inline" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form_data["name"],
+                      expression: "form_data['name']"
+                    }
+                  ],
+                  staticClass: "form-control col-sm-12",
+                  attrs: { type: "text", id: "name" },
+                  domProps: { value: _vm.form_data["name"] },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form_data, "name", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-inline" }, [
+              _c("div", { staticClass: "col-sm-3 form-inline" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form_data["play_count_start"],
+                      expression: "form_data['play_count_start']"
+                    }
+                  ],
+                  staticClass: "form-control col-sm-5",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.form_data["play_count_start"] },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.form_data,
+                        "play_count_start",
+                        $event.target.value
+                      )
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("span", { staticClass: "col-sm-2" }, [_vm._v("~")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form_data["play_count_end"],
+                      expression: "form_data['play_count_end']"
+                    }
+                  ],
+                  staticClass: "form-control col-sm-5",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.form_data["play_count_end"] },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.form_data,
+                        "play_count_end",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-3 form-inline" }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form_data["clear"],
+                        expression: "form_data['clear']"
+                      }
+                    ],
+                    staticClass: "form-control col-sm-12",
+                    attrs: { id: "select" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.form_data,
+                          "clear",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "" } }, [
+                      _vm._v("指定無し")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "1" } }, [
+                      _vm._v("クリア済み")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "0" } }, [
+                      _vm._v("未クリア")
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-4 form-inline" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form_data["score_start"],
+                      expression: "form_data['score_start']"
+                    }
+                  ],
+                  staticClass: "form-control col-sm-5",
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.form_data["score_start"] },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.form_data,
+                        "score_start",
+                        $event.target.value
+                      )
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("span", { staticClass: "col-sm-2" }, [_vm._v("~")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form_data["score_end"],
+                      expression: "form_data['score_end']"
+                    }
+                  ],
+                  staticClass: "form-control col-sm-5",
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.form_data["score_end"] },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form_data, "score_end", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _vm._m(2)
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group text-center" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary col-sm-8",
+                on: { click: _vm.submit }
+              },
+              [_vm._v("絞り込み")]
+            )
+          ])
+        ])
       ])
     ])
   ])
@@ -47911,11 +47918,11 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("label", { staticClass: "col-sm-3", attrs: { for: "name" } }, [
-        _vm._v("名前")
+        _vm._v("user")
       ]),
       _vm._v(" "),
       _c("label", { staticClass: "col-sm-3", attrs: { for: "nankna" } }, [
-        _vm._v("user")
+        _vm._v("なんか1")
       ])
     ])
   },
@@ -47930,11 +47937,11 @@ var staticRenderFns = [
         _vm._v("クリア")
       ]),
       _vm._v(" "),
-      _c("label", { staticClass: "col-sm-3", attrs: { for: "name" } }, [
+      _c("label", { staticClass: "col-sm-4", attrs: { for: "name" } }, [
         _vm._v("スコア")
       ]),
       _vm._v(" "),
-      _c("label", { staticClass: "col-sm-3", attrs: { for: "nankna" } }, [
+      _c("label", { staticClass: "col-sm-2", attrs: { for: "nankna" } }, [
         _vm._v("なんか2")
       ])
     ])
@@ -47943,7 +47950,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-3 form-inline" }, [
+    return _c("div", { staticClass: "col-sm-2 form-inline" }, [
       _c("input", {
         staticClass: "form-control col-sm-12",
         attrs: { type: "text", id: "nankna" }
@@ -48040,6 +48047,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['scores']
@@ -48053,42 +48065,49 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c(
-      "div",
-      {
-        staticClass: "row justify-content-center",
-        attrs: { id: "main_table" }
-      },
-      [
-        _c(
-          "table",
-          [
-            _vm._m(0),
-            _vm._v(" "),
-            _vm._l(_vm.scores, function(score) {
-              return _c("tr", [
-                _c("td", [_vm._v(_vm._s(score.name))]),
+  return _c(
+    "div",
+    {
+      staticClass: "row justify-content-center mt-5",
+      attrs: { id: "main_table" }
+    },
+    [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "card card-default" }, [
+          _c("div", { staticClass: "card-header" }, [_vm._v("スコア")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c(
+              "table",
+              { staticClass: "table table-sm" },
+              [
+                _vm._m(0),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(score.artist))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(score.difficult_name))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(score.level))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(score.score))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(score.play_count))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(score.clear))])
-              ])
-            })
-          ],
-          2
-        )
-      ]
-    )
-  ])
+                _vm._l(_vm.scores, function(score) {
+                  return _c("tr", [
+                    _c("td", [_vm._v(_vm._s(score.name))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(score.artist))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(score.difficult_name))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(score.level))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(score.score))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(score.play_count))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(score.clear))])
+                  ])
+                })
+              ],
+              2
+            )
+          ])
+        ])
+      ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
