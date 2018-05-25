@@ -23,7 +23,7 @@ class MusicMaster extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'master:music {id} {name} {artist} {level} {difficult} {notes_designer} で投げる。name artist dirfficult notes_designerはbase64エンコーディングする。';
 
     /**
      * Create a new command instance.
