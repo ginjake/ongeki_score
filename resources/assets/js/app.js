@@ -30,7 +30,7 @@ var Vueobj = new Vue({
       methods: {
        getList : function(send_data) {
            var vm = this;
-           axios.get('https://www.ginjake.net/ongeki/public/score',{
+           axios.get('//www.ginjake.net/ongeki/score',{
               params: send_data
             }) // => 成功時
            .then(function (response) {
