@@ -40,15 +40,16 @@ class MusicScoreController extends Controller
                         'musics.updated_at',
                         'music_difficulty_relations.level',
                         'music_difficulty_relations.notes_designer',
-                        'music_difficulty_relations.difficulty_id',
-                        'difficulties.name as difficult_name')
+                        'music_difficulty_relations.difficulty_id'
+                        //'difficulties.name as difficult_name'
+                        )
                       ->rightJoin('musics', 'music_scores.music_id', '=', 'musics.id')
                       ->rightJoin('music_difficulty_relations', function($join)
                       {
                           $join->on('music_scores.music_id', '=', 'music_difficulty_relations.music_id')
                           ->on('music_scores.difficulty_id', '=', 'music_difficulty_relations.difficulty_id');
                       })
-                      ->rightJoin('difficulties', 'music_scores.difficulty_id', '=', 'difficulties.id')
+                      //->rightJoin('difficulties', 'music_scores.difficulty_id', '=', 'difficulties.id')
                       ->where('music_scores.user_id',"=",$user->id);
       
       if (isset($get_data["level_start"])) {

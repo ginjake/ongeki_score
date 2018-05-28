@@ -39,6 +39,17 @@ var Vueobj = new Vue({
            .catch(function (error) { // => 失敗時
              console.log("error");
            })
+           
+
+           axios.get('//www.ginjake.net/ongeki/api/difficulty',{
+              params: {type:1}
+            }) // => 成功時
+           .then(function (response) {
+             vm.difficulties = response.data;
+           })
+           .catch(function (error) { // => 失敗時
+             console.log("error");
+           })
          }
      },
   })

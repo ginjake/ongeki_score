@@ -48,8 +48,8 @@
         <main class="py-4">
           <div class="container">
             <div id="app">
-                <form-component v-bind:first_user="'<?php echo(!empty($_GET['user'])?$_GET['user']: '') ?>'"></form-component>
-                <score-table-component v-bind:scores="scores"></score-table-component>
+                <form-component v-bind:first_user="'<?php echo(!empty($_GET['user'])?$_GET['user']: '') ?>'" v-bind:difficulties="difficulties"></form-component>
+                <score-table-component v-bind:scores="scores" v-bind:difficulties="difficulties"></score-table-component>
             </div>
           </div>
         </main>

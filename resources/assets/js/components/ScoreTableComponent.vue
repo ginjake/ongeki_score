@@ -17,7 +17,7 @@
                 <tr v-for="score in scores">
                      <td>{{score.name}}</td>
                      <td>{{score.artist}}</td>
-                     <td>{{score.difficult_name}}</td>
+                     <td>{{difficulties[score.difficulty_id - 1].name}}</td>
                      <td>{{score.level}}</td>
                      <td>{{score.score}}</td>
                      <td>{{score.play_count}}</td>
@@ -33,7 +33,8 @@
 <script>
     export default {
         props: [
-          'scores'
+          'scores',
+          'difficulties'
         ]
     }
 
