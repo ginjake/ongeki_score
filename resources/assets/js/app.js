@@ -23,7 +23,8 @@ Vue.component('score-table-component', require('./components/ScoreTableComponent
 var Vueobj = new Vue({
       el: '#app',
       data: {
-        scores: null
+        scores: null,
+        difficulties: null
       },
       created: function(){
       },

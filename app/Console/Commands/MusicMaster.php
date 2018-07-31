@@ -16,14 +16,14 @@ class MusicMaster extends Command
      *
      * @var string
      */
-    protected $signature = 'master:music {id} {name} {artist} {level} {difficult} {notes_designer}';
+    protected $signature = 'master:music {id} {name} {level} {difficult} ';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'master:music {id} {name} {artist} {level} {difficult} {notes_designer} で投げる。name artist dirfficult notes_designerはbase64エンコーディングする。';
+    protected $description = 'master:music {id} {name} {level} {difficult} で投げる。name artist dirfficult notes_designerはbase64エンコーディングする。';
 
     /**
      * Create a new command instance.
@@ -48,7 +48,7 @@ class MusicMaster extends Command
         'name' => base64_decode($this->argument("name"))
       ],
       [
-        'artist' => base64_decode($this->argument("artist"))
+        'artist' => ""
       ]
       );
       MusicDifficultyRelation::updateOrCreate(
@@ -58,7 +58,7 @@ class MusicMaster extends Command
         ],
         [
           'level' => $this->argument("level"),
-          'notes_designer' => base64_decode($this->argument("notes_designer"))
+          'notes_designer' => ""
         ]
       );
       $response = array();

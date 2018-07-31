@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'オンゲキスコアツール(β)') }}</title>
 
     <!-- Scripts -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -25,7 +25,7 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    オンゲキスコアツールβ
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -37,9 +37,34 @@
 
                     </ul>
 
-                    <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <li><a class="nav-link" href="{{ route('login') }}">{{ __('スコア登録') }}</a></li>
+                        <!-- Authentication Links -->
+                        @guest
+                            <li><a class="nav-link" href="{{ route('login') }}">{{ __('ログイン') }}</a></li>
+                            <li><a class="nav-link" href="{{ route('register') }}">{{ __('新規登録') }}</a></li>
+                            <li><a class="nav-link" href="{{ url('readme') }}">{{ __('使い方') }}</a></li>
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ url('?user='.\Auth::user()['name']) }}">スコアを見る</a>
+                                    <a class="dropdown-item" href="{{ url('home') }}">トップに戻る</a>
+                                    <a class="dropdown-item" href="{{ url('readme') }}">使い方</a>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
                     </ul>
                 </div>
             </div>
@@ -48,6 +73,8 @@
         <main class="py-4">
           <div class="container">
             <div id="app">
+              <div id="widget">
+                <a class="btn btn-primary col-md-2" href="https://twitter.com/intent/tweet?text={{$_GET['user']}}さんのオンゲキのスコアです&hashtags=オンゲキ,オンゲキスコアツール&url={{ url('?user='.$_GET['user']) }}">ツイートする</a>
                 <form-component v-bind:first_user="'<?php echo(!empty($_GET['user'])?$_GET['user']: '') ?>'" v-bind:difficulties="difficulties"></form-component>
                 <score-table-component v-bind:scores="scores" v-bind:difficulties="difficulties"></score-table-component>
             </div>
@@ -56,5 +83,3 @@
     </div>
 </body>
 </html>
-
-

@@ -28,6 +28,7 @@ class DifficultiesTableSeeder extends Seeder
         'name' => 'MASTER',
         'type' => 1
       ]);
+	  /*
       DB::table('difficulties')->insert([
         'name' => '黒',
         'type' => 2
@@ -52,5 +53,6 @@ class DifficultiesTableSeeder extends Seeder
         'name' => '嘘',
         'type' => 3
       ]);
+	  */
     }
 }

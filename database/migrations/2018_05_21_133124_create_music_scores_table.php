@@ -21,9 +21,14 @@ class CreateMusicScoresTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('music_id')->references('id')->on('musics');
             $table->foreign('difficulty_id')->references('id')->on('difficulties');
-            $table->integer('play_count');
-            $table->integer('score');
-            $table->integer('clear');
+            $table->string('over_damage_high_score');
+            $table->unsignedInteger('battle_high_score');
+            $table->unsignedInteger('technical_high_score');
+            $table->unsignedInteger('play_count');
+            $table->unsignedInteger('clear_flag');
+            $table->unsignedInteger('bell_flag');
+            $table->string('ab');
+            $table->dateTime('last_play');
             $table->timestamps();
         });
     }

@@ -7,21 +7,23 @@
               <table class="table table-sm">
                 <tr>
                   <th>name</th>
-                  <th>artist</th>
                   <th>difficult_name</th>
                   <th>level</th>
-                  <th>score</th>
+                  <th>テクニカルスコア</th>
+                  <th>バトルスコア</th>
+                  <th>オーバーダメージスコア</th>
                   <th>play_count</th>
                   <th>clear</th>
                 </tr>
                 <tr v-for="score in scores">
                      <td>{{score.name}}</td>
-                     <td>{{score.artist}}</td>
                      <td>{{difficulties[score.difficulty_id - 1].name}}</td>
                      <td>{{score.level}}</td>
-                     <td>{{score.score}}</td>
+                     <td>{{score.technical_high_score}}</td>
+                     <td>{{score.battle_high_score}}</td>
+                     <td>{{score.over_damage_high_score}}</td>
                      <td>{{score.play_count}}</td>
-                     <td>{{score.clear}}</td>
+                     <td>{{score.clear_flag}}</td>
                  </tr>
                </table>
             </div>

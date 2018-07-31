@@ -15,6 +15,13 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/readme', function () {
+    return view('readme');
+})->name('readme');
+
+Route::get('/index_t', function () {
+    return view('index_t');
+})->name('index_t');
 
 Route::get('upload', 'MusicScoreController@upload');
 Route::post('save_score', 'MusicScoreController@save_score');
@@ -27,13 +34,6 @@ Route::get('csv_sample', function () {
 });
 
 Route::resource('music', 'MusicController');
-//Route::get('music_update', 'MusicController@update');
-//Route::post('music_update', 'MusicController@update');
-//Route::resource('posts', 'PostController');
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');

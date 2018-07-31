@@ -23,10 +23,7 @@ class DatabaseSeeder extends Seeder
           'password' => bcrypt('111111'),
       ]);
        $this->call([
-           DifficultiesTableSeeder::class,
-           MusicsTableSeeder::class,
-           MusicDifficultyRelationsTableSeeder::class,
-           MusicScoresTableSeeder::class,
+           DifficultiesTableSeeder::class
         ]);
     }
 }

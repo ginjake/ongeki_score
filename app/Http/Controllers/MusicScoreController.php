@@ -15,7 +15,7 @@ use Goodby\CSV\Import\Standard\LexerConfig;
 
 class MusicScoreController extends Controller
 {
-  
+
   public function __construct()
   {
       $this->middleware('auth')->except(['index']);
@@ -32,15 +32,20 @@ class MusicScoreController extends Controller
       $user = User::select('id','name')->where('name', "=", $user)->first();
       $score_query = MusicScore::select(
                         'music_scores.play_count',
-                        'music_scores.score',
-                        'music_scores.clear',
                         'musics.id',
                         'musics.name',
                         'musics.artist',
                         'musics.updated_at',
                         'music_difficulty_relations.level',
                         'music_difficulty_relations.notes_designer',
-                        'music_difficulty_relations.difficulty_id'
+                        'music_difficulty_relations.difficulty_id',
+                        'music_scores.over_damage_high_score',
+                        'music_scores.battle_high_score',
+                        'music_scores.technical_high_score',
+                        'music_scores.clear_flag',
+                        'music_scores.bell_flag',
+                        'music_scores.ab',
+                        'music_scores.last_play'
                         //'difficulties.name as difficult_name'
                         )
                       ->rightJoin('musics', 'music_scores.music_id', '=', 'musics.id')
@@ -51,38 +56,38 @@ class MusicScoreController extends Controller
                       })
                       //->rightJoin('difficulties', 'music_scores.difficulty_id', '=', 'difficulties.id')
                       ->where('music_scores.user_id',"=",$user->id);
-      
+
       if (isset($get_data["level_start"])) {
         $score_query->where('music_difficulty_relations.level',">=",$get_data["level_start"]);
       }
       if (isset($get_data["level_end"])) {
         $score_query->where('music_difficulty_relations.level',"<=",$get_data["level_end"]);
       }
-      
+
       if (isset($get_data["score_start"])) {
-        $score_query->where('music_scores.score',">=",$get_data["score_start"]);
+        $score_query->where('music_scores.technical_high_score',">=",$get_data["score_start"]);
       }
       if (isset($get_data["score_end"])) {
-        $score_query->where('music_scores.score',"<=",$get_data["score_end"]);
+        $score_query->where('music_scores.technical_high_score',"<=",$get_data["score_end"]);
       }
-      
+
       if (isset($get_data["play_count_start"])) {
         $score_query->where('music_scores.play_count',">=",$get_data["play_count_start"]);
       }
       if (isset($get_data["play_count_end"])) {
         $score_query->where('music_scores.play_count',"<=",$get_data["play_count_end"]);
       }
-      
+
       if (isset($get_data["clear"])) {
-        $score_query->where('music_scores.clear',"=",$get_data["clear"]);
+        $score_query->where('music_scores.clear_flag',"=",$get_data["clear"]);
       }
       if (isset($get_data["difficulty"])) {
-        $score_query->where('difficulties.name',"=",$get_data["difficulty"]);
+        $score_query->where('music_scores.difficulty_id',"=",Difficulty::get_id_from_name($get_data["difficulty"]));
       }
       $scores = $score_query->get();
-                      
-      
-      return response()->json( 
+
+
+      return response()->json(
         [
           'user'=>$user,
           'scores' => $scores
@@ -93,7 +98,7 @@ class MusicScoreController extends Controller
     return view('music_scores.upload');
   }
   public function save_score(Request $request) {
-    
+
     $file     = $request->file('csv_file');
     if ($file->getClientSize() > 1000000 || $file->getClientOriginalExtension() !== "csv") {
       $request->session()->flash('message', '登録失敗');
@@ -101,12 +106,12 @@ class MusicScoreController extends Controller
     }
     $fileName = $file->getClientOriginalName(). '_'. time();
     $move     = $file->move(storage_path(). '/upload', $fileName);
-    
+
     $config = new LexerConfig();
     $config->setDelimiter(",")
            ->setIgnoreHeaderLine(true);
            $interpreter = new Interpreter();
-           
+
     $interpreter->addObserver(function(array $columns) {
         // CSVファイルを1行ずつ処理
         $difficult_id = Difficulty::get_id_from_name($columns[2]);
@@ -118,20 +123,25 @@ class MusicScoreController extends Controller
               'difficulty_id' =>$difficult_id
             ],
             [
-              'play_count' =>  $columns[3],
-              'score' =>  $columns[4],
-              'clear' =>  $columns[5]
+              'over_damage_high_score' => $columns[3],
+              'battle_high_score' => $columns[4],
+              'technical_high_score' => $columns[5],
+              'play_count' =>  $columns[6],
+              'clear_flag' =>  $columns[7],
+              'bell_flag' =>  $columns[8],
+              'ab' =>  $columns[9],
+              'last_play' =>  $columns[10],
             ]
           );
         }
     });
 
-    $request->session()->flash('message', '登録したでござる');
+    $request->session()->flash('message', '登録しました');
     $lexer = new Lexer($config);
     $lexer->parse($move, $interpreter);
     \File::delete($move);
 
     return view('music_scores.upload');
-    
+
   }
 }

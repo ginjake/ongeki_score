@@ -9,7 +9,7 @@
                       <label class="col-sm-3">レベル</label>
                       <label for="difficult" class="col-sm-3">難易度</label>
                       <label for="name" class="col-sm-3">user</label>
-                      <label for="nankna" class="col-sm-3">なんか1</label>
+                      <label for="nankna" class="col-sm-3">未実装</label>
                     </div>
                     <div class="form-inline">
                       <div class="col-sm-3 form-inline">
@@ -31,13 +31,13 @@
                       </div>
                     </div>
                   </div>
-                  
+
                   <div class="form-group">
                     <div class="form-inline">
                       <label class="col-sm-3">回数</label>
                       <label for="difficult" class="col-sm-3">クリア</label>
-                      <label for="name" class="col-sm-4">スコア</label>
-                      <label for="nankna" class="col-sm-2">なんか2</label>
+                      <label for="name" class="col-sm-4">テクニカルスコア</label>
+                      <label for="nankna" class="col-sm-2">未実装</label>
                     </div>
                     <div class="form-inline">
                       <div class="col-sm-3 form-inline">
@@ -84,7 +84,7 @@
         ],
         mounted() {
             console.log('Component mounted.')
-            
+
             this.$parent.getList(this.form_data)
         },
         methods: {
