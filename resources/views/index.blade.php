@@ -9,6 +9,15 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'オンゲキスコアツール(β)') }}</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123144187-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-123144187-1');
+    </script>
 
     <!-- Scripts -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -74,7 +83,7 @@
           <div class="container">
             <div id="app">
               <div id="widget">
-                <a class="btn btn-primary col-md-2" href="https://twitter.com/intent/tweet?text={{$_GET['user']}}さんのオンゲキのスコアです&hashtags=オンゲキ,オンゲキスコアツール&url={{ url('?user='.$_GET['user']) }}">ツイートする</a>
+                <a class="btn btn-primary col-md-2" href="https://twitter.com/intent/tweet?text={{ empty($_GET['user']) ? : $_GET['user'] }}さんのオンゲキのスコアです&hashtags=オンゲキ,オンゲキスコアツール&url={{ empty($_GET['user']) ? : url('?user='.$_GET['user']) }}">ツイートする</a>
                 <form-component v-bind:first_user="'<?php echo(!empty($_GET['user'])?$_GET['user']: '') ?>'" v-bind:difficulties="difficulties"></form-component>
                 <score-table-component v-bind:scores="scores" v-bind:difficulties="difficulties"></score-table-component>
             </div>

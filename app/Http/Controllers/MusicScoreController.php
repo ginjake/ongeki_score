@@ -34,7 +34,6 @@ class MusicScoreController extends Controller
                         'music_scores.play_count',
                         'musics.id',
                         'musics.name',
-                        'musics.artist',
                         'musics.updated_at',
                         'music_difficulty_relations.level',
                         'music_difficulty_relations.notes_designer',
@@ -71,6 +70,20 @@ class MusicScoreController extends Controller
         $score_query->where('music_scores.technical_high_score',"<=",$get_data["score_end"]);
       }
 
+      if (isset($get_data["damage_score_start"])) {
+        $score_query->where('music_scores.over_damage_high_score',">=",$get_data["damage_score_start"]);
+      }
+      if (isset($get_data["damage_score_start"])) {
+        $score_query->where('music_scores.over_damage_high_score',"<=",$get_data["damage_score_end"]);
+      }
+      
+      if (isset($get_data["battle_score_start"])) {
+        $score_query->where('music_scores.battle_high_score',">=",$get_data["battle_score_start"]);
+      }
+      if (isset($get_data["battle_score_end"])) {
+        $score_query->where('music_scores.battle_high_score',"<=",$get_data["battle_score_end"]);
+      }
+      
       if (isset($get_data["play_count_start"])) {
         $score_query->where('music_scores.play_count',">=",$get_data["play_count_start"]);
       }
@@ -123,7 +136,7 @@ class MusicScoreController extends Controller
               'difficulty_id' =>$difficult_id
             ],
             [
-              'over_damage_high_score' => $columns[3],
+              'over_damage_high_score' => str_replace("%", "", $columns[3]),
               'battle_high_score' => $columns[4],
               'technical_high_score' => $columns[5],
               'play_count' =>  $columns[6],

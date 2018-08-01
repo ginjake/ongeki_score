@@ -18,7 +18,8 @@
         "laravel-mix": "^2.0",
         "lodash": "^4.17.4",
         "imagemin-pngquant": "5.0.1",
-        "vue": "^2.5.7"
+        "vue": "^2.5.7",
+        "babel-polyfill": "^6.26.0"
     },
     "dependencies": {
         "ajv": "^6.5.0"
