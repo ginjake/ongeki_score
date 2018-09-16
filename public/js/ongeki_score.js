@@ -1,4 +1,4 @@
-let wait = 1000
+let wait = 500
 var crawler_list = []
 var result_area_html = '<div style="background-color:rgb(200,200,255);border-radius:10px;"><div id="disp_result_area" style="padding:10px;"></div></div>'
 var level_list = [
