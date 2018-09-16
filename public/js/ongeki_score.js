@@ -143,7 +143,7 @@ function make_crawler() {
       var technical_high_score = $(".score_table  tbody tr:nth-child(2) td:nth-child(3)", block_obj).text().replace(/,/g,"")
 
       var clear_flag = 0
-      if ($(".music_score_icon_area img:nth-child(1)", block_obj)[0].src.match(/music_icon_br_usually.png/)) {
+      if ($(".music_score_icon_area img:nth-child(1)", block_obj)[0].src.match(/music_icon_br_/)) {
           clear_flag = 1
       }
 
