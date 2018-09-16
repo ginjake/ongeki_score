@@ -85,6 +85,8 @@ function make_page_crawler(detail_crawler) {
           let difficult;
           if ($('img:nth-child(2)', element)[0].src.match(/basic/)) {
               difficult = "BASIC"
+          } else if ($('img:nth-child(2)', element)[0].src.match(/lunatic/)) {
+              difficult = "LUNATIC"
           } else {
               return // id取るだけならbasicだけで良い
               if ($('img:nth-child(2)', element)[0].src.match(/advanced/)) {
@@ -177,11 +179,11 @@ function make_crawler() {
       $("#disp_result_area").append(JSON.stringify(data)+"<br><br>");
   }
   let get_detail_data = (response, music_data) => {
-
       difficult_single_get(music_data, "basic", response)
       difficult_single_get(music_data, "advanced", response)
       difficult_single_get(music_data, "expert", response)
       difficult_single_get(music_data, "master", response)
+      difficult_single_get(music_data, "lunatic", response)
    };
   get_recursion = function(crawler_list) {
     console.log(crawl_id)
