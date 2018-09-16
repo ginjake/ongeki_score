@@ -2,6 +2,7 @@ let wait = 1000
 var crawler_list = []
 var result_area_html = '<div style="background-color:rgb(200,200,255);border-radius:10px;"><div id="disp_result_area" style="padding:10px;"></div></div>'
 var level_list = [
+    {id:1, name:"1"},
     {id:3, name:"2"},
     {id:5, name:"3"},
     {id:7, name:"4"},
@@ -21,6 +22,7 @@ var level_list = [
     {id:24, name:"12.5"},
     {id:25, name:"13"},
     {id:26, name:"13.5"},
+    {id:27, name:"14"},
 ]
 
 function save_csv(data) {
