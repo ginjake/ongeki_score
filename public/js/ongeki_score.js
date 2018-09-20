@@ -1,7 +1,8 @@
-let wait = 1000
+let wait = 500
 var crawler_list = []
 var result_area_html = '<div style="background-color:rgb(200,200,255);border-radius:10px;"><div id="disp_result_area" style="padding:10px;"></div></div>'
 var level_list = [
+    {id:1, name:"1"},
     {id:3, name:"2"},
     {id:5, name:"3"},
     {id:7, name:"4"},
@@ -21,6 +22,7 @@ var level_list = [
     {id:24, name:"12.5"},
     {id:25, name:"13"},
     {id:26, name:"13.5"},
+    {id:27, name:"14"},
 ]
 
 function save_csv(data) {
@@ -83,6 +85,8 @@ function make_page_crawler(detail_crawler) {
           let difficult;
           if ($('img:nth-child(2)', element)[0].src.match(/basic/)) {
               difficult = "BASIC"
+          } else if ($('img:nth-child(2)', element)[0].src.match(/lunatic/)) {
+              difficult = "LUNATIC"
           } else {
               return // id取るだけならbasicだけで良い
               if ($('img:nth-child(2)', element)[0].src.match(/advanced/)) {
@@ -139,7 +143,7 @@ function make_crawler() {
       var technical_high_score = $(".score_table  tbody tr:nth-child(2) td:nth-child(3)", block_obj).text().replace(/,/g,"")
 
       var clear_flag = 0
-      if ($(".music_score_icon_area img:nth-child(1)", block_obj)[0].src.match(/music_icon_br_usually.png/)) {
+      if ($(".music_score_icon_area img:nth-child(1)", block_obj)[0].src.match(/music_icon_br_/)) {
           clear_flag = 1
       }
 
@@ -175,11 +179,11 @@ function make_crawler() {
       $("#disp_result_area").append(JSON.stringify(data)+"<br><br>");
   }
   let get_detail_data = (response, music_data) => {
-
       difficult_single_get(music_data, "basic", response)
       difficult_single_get(music_data, "advanced", response)
       difficult_single_get(music_data, "expert", response)
       difficult_single_get(music_data, "master", response)
+      difficult_single_get(music_data, "lunatic", response)
    };
   get_recursion = function(crawler_list) {
     console.log(crawl_id)
