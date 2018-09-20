@@ -16,14 +16,14 @@ class MusicMaster extends Command
      *
      * @var string
      */
-    protected $signature = 'master:music {id} {name} {level} {difficult} ';
+    protected $signature = 'master:music {id} {difficult} {level} {name} ';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'master:music {id} {name} {level} {difficult} で投げる。name artist dirfficult notes_designerはbase64エンコーディングする。';
+    protected $description = 'master:music {id} {difficult} {level} {name} で投げる。name artist dirfficult notes_designerはbase64エンコーディングする。';
 
     /**
      * Create a new command instance.
@@ -45,7 +45,7 @@ class MusicMaster extends Command
       $music = Music::updateOrCreate(
       [
         'id' =>  $this->argument("id"),
-        'name' => base64_decode($this->argument("name"))
+        'name' => urldecode($this->argument("name"))
       ],
       [
         'artist' => ""
@@ -54,7 +54,7 @@ class MusicMaster extends Command
       MusicDifficultyRelation::updateOrCreate(
         [
           'music_id' => $this->argument("id"),
-          'difficulty_id' => Difficulty::get_id_from_name(base64_decode($this->argument("difficult")))
+          'difficulty_id' => Difficulty::get_id_from_name(urldecode($this->argument("difficult")))
         ],
         [
           'level' => $this->argument("level"),
@@ -63,8 +63,8 @@ class MusicMaster extends Command
       );
       $response = array();
       $response['status'] = "OK";
-      $response['name'] = base64_decode($this->argument("name"));
-      $response['difficult'] = base64_decode($this->argument("difficult"));
+      $response['name'] = urldecode($this->argument("name"));
+      $response['difficult'] = urldecode($this->argument("difficult"));
       $response['level'] = $this->argument("level");
       print_r($response);
     }
