@@ -57122,7 +57122,7 @@ var render = function() {
             _c("div", { staticClass: "table-responsive" }, [
               _c(
                 "table",
-                { staticClass: "table table-sm" },
+                { staticClass: "table table-sm", attrs: { id: "main_table" } },
                 [
                   _vm._m(0),
                   _vm._v(" "),

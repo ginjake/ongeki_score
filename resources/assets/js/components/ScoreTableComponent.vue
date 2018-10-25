@@ -5,7 +5,7 @@
             <div class="card-header">スコア</div>
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-sm">
+                <table id="main_table" class="table table-sm">
                   <tr>
                     <th>名前</th>
                     <th>難易度</th>

@@ -97,6 +97,7 @@ class MusicScoreController extends Controller
       if (isset($get_data["difficulty"])) {
         $score_query->where('music_scores.difficulty_id',"=",Difficulty::get_id_from_name($get_data["difficulty"]));
       }
+      $score_query->orderBy('music_difficulty_relations.level', 'desc');
       $scores = $score_query->get();
 
 
