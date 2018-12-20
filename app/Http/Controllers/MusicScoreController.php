@@ -76,14 +76,14 @@ class MusicScoreController extends Controller
       if (isset($get_data["damage_score_start"])) {
         $score_query->where('music_scores.over_damage_high_score',"<=",$get_data["damage_score_end"]);
       }
-      
+
       if (isset($get_data["battle_score_start"])) {
         $score_query->where('music_scores.battle_high_score',">=",$get_data["battle_score_start"]);
       }
       if (isset($get_data["battle_score_end"])) {
         $score_query->where('music_scores.battle_high_score',"<=",$get_data["battle_score_end"]);
       }
-      
+
       if (isset($get_data["play_count_start"])) {
         $score_query->where('music_scores.play_count',">=",$get_data["play_count_start"]);
       }
@@ -130,23 +130,26 @@ class MusicScoreController extends Controller
         // CSVファイルを1行ずつ処理
         $difficult_id = Difficulty::get_id_from_name($columns[2]);
         if (!empty($difficult_id)) { //存在しない難易度は処理しない
-          MusicScore::updateOrCreate(
-            [
-              'user_id' => Auth::user()['id'],
-              'music_id' => $columns[0],
-              'difficulty_id' =>$difficult_id
-            ],
-            [
-              'over_damage_high_score' => str_replace("%", "", $columns[3]),
-              'battle_high_score' => $columns[4],
-              'technical_high_score' => $columns[5],
-              'play_count' =>  $columns[6],
-              'clear_flag' =>  $columns[7],
-              'bell_flag' =>  $columns[8],
-              'ab' =>  $columns[9],
-              'last_play' =>  $columns[10],
-            ]
-          );
+          //曲idが存在しなければ処理しない
+          if(Music::where('id', $columns[0])->exists()) {
+              MusicScore::updateOrCreate(
+                [
+                  'user_id' => Auth::user()['id'],
+                  'music_id' => $columns[0],
+                  'difficulty_id' =>$difficult_id
+                ],
+                [
+                  'over_damage_high_score' => str_replace("%", "", $columns[3]),
+                  'battle_high_score' => $columns[4],
+                  'technical_high_score' => $columns[5],
+                  'play_count' =>  $columns[6],
+                  'clear_flag' =>  $columns[7],
+                  'bell_flag' =>  $columns[8],
+                  'ab' =>  $columns[9],
+                  'last_play' =>  $columns[10],
+                ]
+              );
+          }
         }
     });
 

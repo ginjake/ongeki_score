@@ -33,6 +33,7 @@
                   <div>07/30 jsをブックマークレット化。readme修正</div>
                   <div>09/20 Lunatic対応。cielavenirさんありがとうございます。</div>
                   <div>09/21 ブックマークレットの使い方を補足</div>
+                  <div>12/21 スコアを登録できなかったバグを修正</div>
                 </div>
             </div>
         </div>
